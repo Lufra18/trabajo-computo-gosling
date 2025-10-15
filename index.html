@@ -1,96 +1,151 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>James Gosling — Breve ficha</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barbara Liskov — Biografía, Contribuciones y Legado</title>
   <style>
-   
-    :root{--bg:#f7fafc;--card:#ffffff;--muted:#6b7280;--accent:#1f2937}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--accent); margin:0; padding:24px;}
-    .container{max-width:900px;margin:0 auto}
-    header{display:flex;gap:18px;align-items:center;margin-bottom:18px}
-    .avatar{width:140px;height:140px;border-radius:8px;flex:0 0 140px;object-fit:cover;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
-    .card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,0.04)}
-    h1{font-size:1.5rem;margin:0}
-    p.lead{margin:6px 0 0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
-    @media (max-width:820px){.grid{grid-template-columns:1fr} .avatar{width:110px;height:110px}}
-    section{margin-bottom:12px}
-    h2{font-size:1.05rem;margin:0 0 8px}
-    ul{margin:6px 0 0;padding-left:18px}
-    .meta{font-size:0.9rem;color:var(--muted)}
-    .download{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;text-decoration:none;border:1px solid rgba(0,0,0,0.06);background:#fff}
-    footer{font-size:0.85rem;color:var(--muted);margin-top:18px;text-align:center}
-    .timeline{border-left:3px solid #e6e9ef;padding-left:12px}
-    .timeline li{margin-bottom:10px}
+    :root{
+      --bg:#eef3f8;
+      --card:#ffffff;
+      --accent:#0052d4;
+      --accent2:#4364f7;
+      --accent3:#6fb1fc;
+      --muted:#333;
+      --radius:12px;
+      --shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Inter', Poppins, sans-serif;background:var(--bg);color:#111}
+
+    /* HEADER limpiado y centrado correctamente */
+    header{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      padding:48px 20px 56px;
+      text-align:center;
+      color:#fff;
+      border-bottom-left-radius:48px;
+      border-bottom-right-radius:48px;
+      box-shadow:var(--shadow);
+    }
+    .header-inner{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px}
+    .profile-img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:5px solid rgba(255,255,255,0.9);box-shadow:0 6px 18px rgba(0,0,0,0.18)}
+    h1{margin:0;font-size:32px;line-height:1.05}
+    p.lead{margin:0;color:rgba(255,255,255,0.92);font-size:16px}
+
+    main{max-width:1100px;margin:-32px auto 60px;padding:0 20px}
+
+    section.card{background:var(--card);border-radius:12px;box-shadow:var(--shadow);padding:22px;margin-bottom:32px}
+    h2{margin:0 0 14px;color:var(--accent)}
+
+    /* Línea de tiempo horizontal arreglada */
+    .timeline-wrap{overflow-x:auto;padding:24px 12px}
+    .timeline{position:relative;display:flex;gap:40px;align-items:flex-start;padding:36px 12px;min-width:760px}
+
+    /* línea central (barra) */
+    .timeline::before{content:'';position:absolute;left:0;right:0;top:50px;height:6px;background:linear-gradient(90deg,var(--accent2),var(--accent3));border-radius:4px;z-index:0}
+
+    .event{
+      position:relative;width:240px;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;
+    }
+    .event .dot{width:18px;height:18px;border-radius:50%;background:var(--accent2);border:4px solid #fff;box-shadow:0 0 0 6px rgba(67,100,247,0.12);position:relative;top:38px}
+    .event .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(13,38,76,0.06);transform:translateY(-24px)}
+    .event h3{margin:8px 0 6px;color:var(--accent2);font-size:16px}
+    .event p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Flecha / ramificación visual opcional debajo de cada punto (sutil) */
+    .event .branch{width:2px;height:16px;background:linear-gradient(var(--accent2),var(--accent3));margin-top:6px;border-radius:2px}
+
+    /* Secciones descriptivas debajo de la línea de tiempo */
+    .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px}
+    .detail{background:Linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(12,32,64,0.06)}
+    .detail h4{margin:0 0 8px;color:var(--accent2)}
+    .detail p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+
+    footer{max-width:1100px;margin:0 auto 40px;padding:18px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent2),var(--accent3));border-radius:12px}
+
+    @media(max-width:880px){
+      .detail-grid{grid-template-columns:1fr}
+      .timeline{gap:20px;min-width:640px}
+      .event{width:200px}
+      h1{font-size:26px}
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <header>
-        
-        <img class="avatar" src="https://media.licdn.com/dms/image/v2/C4D03AQFkeUrRk0xpOQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1516261592197?e=2147483647&v=beta&t=SUlL26l1rDhID1BzisZrVK2OBDyLe9Ui-btOZNBr0M0" alt="James Gosling">
-        <div>
-          <h1>James Gosling</h1>
-          <p class="lead">Creador del lenguaje de programación Java y figura clave en la ingeniería de software moderna.</p>
-          <p class="meta">	19 de mayo de 1955 (70 años)</p>
+  <header>
+    <div class="header-inner">
+      <img class="profile-img" src="https://cdn.britannica.com/86/129086-004-A93A7277/Barbara-Liskov-Turing-Award-2008.jpg" alt="Barbara Liskov">
+      <div>
+        <h1>Barbara Liskov</h1>
+        <p class="lead">Pionera en ciencias de la computación — Lenguajes, abstracción de datos y sistemas distribuidos.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Línea de Tiempo </h2>
+      <div class="timeline-wrap">
+        <div class="timeline">
+          <div class="event">
+            <div class="card"><h3>1939</h3><p>Nacimiento en Los Ángeles, California.</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
+
+          <div class="event">
+            <div class="card"><h3>1961</h3><p>Licenciatura en Matemáticas — UC Berkeley.</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
+
+          <div class="event">
+            <div class="card"><h3>1968</h3><p>Ph.D. en Ciencias de la Computación — Stanford.</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
+
+          <div class="event">
+            <div class="card"><h3>1970s</h3><p>Desarrollo de CLU — Abstracción de datos y tipos genéricos.</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
+
+          <div class="event">
+            <div class="card"><h3>1987</h3><p>Enuncia el Principio de Sustitución de Liskov (LSP).</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
+
+          <div class="event">
+            <div class="card"><h3>2008</h3><p>Premio A. M. Turing por sus contribuciones.</p></div>
+            <div class="dot"></div>
+            <div class="branch" aria-hidden="true"></div>
+          </div>
         </div>
-      </header>
-
-      <div class="grid">
-        <main>
-          <section>
-            <h2>Reseña breve</h2>
-            <p>James Gosling es conocido por diseñar e implementar el lenguaje de programación <strong>Java</strong> y su máquina virtual original. Su trabajo hizo posible el lema "write once, run anywhere" gracias a la abstracción de la plataforma y la portabilidad del bytecode.</p>
-          </section>
-
-          <section>
-            <h2>Contribuciones clave</h2>
-            <ul>
-              <li>Diseño e implementación del lenguaje Java (compilador y JVM originales).</li>
-              <li>Trabajo en sistemas distribuidos y herramientas para desarrolladores en Sun Microsystems.</li>
-              <li>Participación en proyectos posteriores relacionados con robótica, IoT y plataformas en la nube.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Impacto</h2>
-            <p>Java se convirtió en una de las tecnologías de software más usadas en servidores, aplicaciones empresariales, sistemas embebidos y aplicaciones Android (históricamente). La idea de una máquina virtual estandarizada y un lenguaje con recolección de basura influyeron en diseños posteriores de lenguajes y plataformas.</p>
-          </section>
-
-          <section>
-            <h2>Línea de tiempo</h2>
-            <ul class="timeline">
-              <li><strong>1977–1983:</strong> Formación académica y primeros trabajos en sistemas y compiladores.</li>
-              <li><strong>1990s:</strong> Desarrollo de Java en Sun Microsystems; publicación y adopción global.</li>
-              <li><strong>2010 en adelante:</strong> Tras la adquisición de Sun por Oracle, Gosling trabajó en varias empresas y proyectos relacionados con software y hardware.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Frases y anécdotas</h2>
-            <p class="meta">Gosling es conocido en la comunidad por su sentido práctico y su curiosidad por la tecnología aplicada a problemas reales (p. ej. sistemas embebidos y robótica).</p>
-          </section>
-        </main>
-
-        <aside>
-          <section class="card">
-            <h2>Datos rápidos</h2>
-            <p class="meta"><strong>Profesión:</strong> Informático / Ingeniero de Software</p>
-            <p class="meta"><strong>Conocido por:</strong> Java, JVM</p>
-           
-          </section>
-
-          
-        </aside>
       </div>
 
-      
-    </div>
-  </div>
+      <!-- Secciones separadas con Biografía / Contribuciones / Legado -->
+      <div class="detail-grid">
+        <div class="detail">
+          <h4>Biografía</h4>
+          <p>Barbara Jane Liskov (1939) estudió en Berkeley y Stanford. Fue una de las primeras mujeres en obtener un Ph.D. en ciencias de la computación en EE. UU. y ha sido profesora en el MIT durante décadas.</p>
+        </div>
+        <div class="detail">
+          <h4>Contribuciones</h4>
+          <p>CLU, abstracción de datos, tipos genéricos, y el Principio de Sustitución de Liskov (LSP). Trabajo influyente en sistemas distribuidos y tolerancia a fallos.</p>
+        </div>
+        <div class="detail">
+          <h4>Legado</h4>
+          <p>Su trabajo es base en el diseño de software moderno; influyó en lenguajes y prácticas que hoy usamos. Es un referente para la inclusión de mujeres en la informática.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  
+  <footer>
+    <small></small>
+  </footer>
 </body>
 </html>
