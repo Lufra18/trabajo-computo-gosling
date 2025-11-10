@@ -1,151 +1,181 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Barbara Liskov — Biografía, Contribuciones y Legado</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Grace Hopper — Vida y legado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#eef3f8;
-      --card:#ffffff;
-      --accent:#0052d4;
-      --accent2:#4364f7;
-      --accent3:#6fb1fc;
-      --muted:#333;
-      --radius:12px;
-      --shadow:0 8px 24px rgba(0,0,0,0.08);
+      --bg-1:#071126; --bg-2:#071827; --card:#07192a; --glass:rgba(255,255,255,0.04);
+      --accent:#06b6d4; --accent-2:#8b5cf6; --muted:#9fb0c4; --glass-2:rgba(255,255,255,0.02);
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:'Inter', Poppins, sans-serif;background:var(--bg);color:#111}
+    html,body{height:100%}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:radial-gradient(1200px 600px at 10% 10%, rgba(11,28,45,0.6), transparent), linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#e6eef6; -webkit-font-smoothing:antialiased}
 
-    /* HEADER limpiado y centrado correctamente */
-    header{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      padding:48px 20px 56px;
-      text-align:center;
-      color:#fff;
-      border-bottom-left-radius:48px;
-      border-bottom-right-radius:48px;
-      box-shadow:var(--shadow);
-    }
-    .header-inner{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px}
-    .profile-img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:5px solid rgba(255,255,255,0.9);box-shadow:0 6px 18px rgba(0,0,0,0.18)}
-    h1{margin:0;font-size:32px;line-height:1.05}
-    p.lead{margin:0;color:rgba(255,255,255,0.92);font-size:16px}
+    .container{max-width:1100px;margin:36px auto;padding:28px}
 
-    main{max-width:1100px;margin:-32px auto 60px;padding:0 20px}
+    header{display:flex;align-items:center;gap:20px;backdrop-filter: blur(6px);padding:18px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,0.6)}
 
-    section.card{background:var(--card);border-radius:12px;box-shadow:var(--shadow);padding:22px;margin-bottom:32px}
-    h2{margin:0 0 14px;color:var(--accent)}
+    .avatar{width:140px;height:140px;border-radius:16px;background:linear-gradient(135deg,var(--glass), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 140px;border:1px solid rgba(255,255,255,0.03)}
+    .avatar img{width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform .5s ease}
+    .avatar:hover img{transform:scale(1.04)}
 
-    /* Línea de tiempo horizontal arreglada */
-    .timeline-wrap{overflow-x:auto;padding:24px 12px}
-    .timeline{position:relative;display:flex;gap:40px;align-items:flex-start;padding:36px 12px;min-width:760px}
+    h1{font-size:30px;margin:0;font-weight:800;letter-spacing:-0.5px}
+    p.lead{color:var(--muted);margin:8px 0 14px;max-width:760px}
 
-    /* línea central (barra) */
-    .timeline::before{content:'';position:absolute;left:0;right:0;top:50px;height:6px;background:linear-gradient(90deg,var(--accent2),var(--accent3));border-radius:4px;z-index:0}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:9px 14px;border-radius:12px;color:inherit;text-decoration:none;font-size:14px;transition:all .18s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2)}
+    .primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;color:#041023;font-weight:600}
 
-    .event{
-      position:relative;width:240px;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;
-    }
-    .event .dot{width:18px;height:18px;border-radius:50%;background:var(--accent2);border:4px solid #fff;box-shadow:0 0 0 6px rgba(67,100,247,0.12);position:relative;top:38px}
-    .event .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(13,38,76,0.06);transform:translateY(-24px)}
-    .event h3{margin:8px 0 6px;color:var(--accent2);font-size:16px}
-    .event p{margin:0;color:var(--muted);font-size:14px}
+    main{margin-top:24px;display:grid;grid-template-columns:1fr 360px;gap:24px}
 
-    /* Flecha / ramificación visual opcional debajo de cada punto (sutil) */
-    .event .branch{width:2px;height:16px;background:linear-gradient(var(--accent2),var(--accent3));margin-top:6px;border-radius:2px}
+    article{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:26px;border-radius:18px;box-shadow:0 14px 30px rgba(3,7,18,0.6);border:1px solid rgba(255,255,255,0.02)}
+    article h2{margin-top:0}
+    .muted{color:var(--muted);font-size:15px}
 
-    /* Secciones descriptivas debajo de la línea de tiempo */
-    .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px}
-    .detail{background:Linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(12,32,64,0.06)}
-    .detail h4{margin:0 0 8px;color:var(--accent2)}
-    .detail p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    aside{position:relative}
+    .card{background:linear-gradient(180deg,var(--card), rgba(10,18,30,0.6));padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 20px rgba(2,6,23,0.5)}
+    .card + .card{margin-top:14px}
 
-    footer{max-width:1100px;margin:0 auto 40px;padding:18px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent2),var(--accent3));border-radius:12px}
+    .timeline{list-style:none;padding:8px 6px;margin:0}
+    .timeline li{position:relative;padding-left:22px;margin-bottom:14px;border-left:2px dashed rgba(255,255,255,0.03)}
+    .timeline li:before{content:"";position:absolute;left:-6px;top:4px;width:14px;height:14px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:50%;box-shadow:0 6px 16px rgba(8,20,30,0.6)}
 
-    @media(max-width:880px){
-      .detail-grid{grid-template-columns:1fr}
-      .timeline{gap:20px;min-width:640px}
-      .event{width:200px}
-      h1{font-size:26px}
-    }
+    .stats{display:flex;gap:10px;margin-top:10px}
+    .stat{flex:1;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);text-align:center}
+    .stat h4{margin:6px 0 0}
+    .stat p{margin:0;color:var(--muted)}
+
+    .quote{font-style:italic;border-left:3px solid rgba(255,255,255,0.06);padding-left:12px;color:#dff6fb}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Animations */
+    .fade-in{animation:fadeIn .8s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* Responsive */
+    @media (max-width:1000px){main{grid-template-columns:1fr}aside{order:-1}.avatar{width:120px;height:120px}}
+
+    /* Fancy header decoration */
+    .ribbon{position:absolute;right:18px;top:-22px;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:8px 14px;border-radius:999px;color:#021022;font-weight:700;box-shadow:0 8px 18px rgba(8,20,30,0.6)}
+
+    /* Toggle light/dark (simple) */
+    .theme-toggle{margin-left:auto}
+
+    /* Code block style (if used) */
+    pre{background:rgba(0,0,0,0.18);padding:12px;border-radius:10px;overflow:auto}
+
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <img class="profile-img" src="https://cdn.britannica.com/86/129086-004-A93A7277/Barbara-Liskov-Turing-Award-2008.jpg" alt="Barbara Liskov">
-      <div>
-        <h1>Barbara Liskov</h1>
-        <p class="lead">Pionera en ciencias de la computación — Lenguajes, abstracción de datos y sistemas distribuidos.</p>
+  <div class="container">
+    <header class="fade-in" style="position:relative">
+      <div class="avatar">
+        <img src="https://c.files.bbci.co.uk/CDF3/production/_93532725_hi037223280.jpg" alt="Grace Hopper">
       </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="card">
-      <h2>Línea de Tiempo </h2>
-      <div class="timeline-wrap">
-        <div class="timeline">
-          <div class="event">
-            <div class="card"><h3>1939</h3><p>Nacimiento en Los Ángeles, California.</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-
-          <div class="event">
-            <div class="card"><h3>1961</h3><p>Licenciatura en Matemáticas — UC Berkeley.</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-
-          <div class="event">
-            <div class="card"><h3>1968</h3><p>Ph.D. en Ciencias de la Computación — Stanford.</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-
-          <div class="event">
-            <div class="card"><h3>1970s</h3><p>Desarrollo de CLU — Abstracción de datos y tipos genéricos.</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-
-          <div class="event">
-            <div class="card"><h3>1987</h3><p>Enuncia el Principio de Sustitución de Liskov (LSP).</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-
-          <div class="event">
-            <div class="card"><h3>2008</h3><p>Premio A. M. Turing por sus contribuciones.</p></div>
-            <div class="dot"></div>
-            <div class="branch" aria-hidden="true"></div>
-          </div>
-        </div>
+      <div style="flex:1">
+        <h1>Grace Murray Hopper</h1>
+        <p class="lead">Matemática, pionera en computación, contraalmirante de la Marina de Estados Unidos y una de las figuras clave en la creación de compiladores y el lenguaje COBOL. Esta página muestra una versión más visual y estilizada con CSS avanzado.</p>
+        <nav>
+          <a class="btn" href="#biografia">Biografía</a>
+          <a class="btn" href="#logros">Logros</a>
+          <a class="btn" href="#linea-tiempo">Línea de tiempo</a>
+          
+        </nav>
       </div>
 
-      <!-- Secciones separadas con Biografía / Contribuciones / Legado -->
-      <div class="detail-grid">
-        <div class="detail">
-          <h4>Biografía</h4>
-          <p>Barbara Jane Liskov (1939) estudió en Berkeley y Stanford. Fue una de las primeras mujeres en obtener un Ph.D. en ciencias de la computación en EE. UU. y ha sido profesora en el MIT durante décadas.</p>
-        </div>
-        <div class="detail">
-          <h4>Contribuciones</h4>
-          <p>CLU, abstracción de datos, tipos genéricos, y el Principio de Sustitución de Liskov (LSP). Trabajo influyente en sistemas distribuidos y tolerancia a fallos.</p>
-        </div>
-        <div class="detail">
-          <h4>Legado</h4>
-          <p>Su trabajo es base en el diseño de software moderno; influyó en lenguajes y prácticas que hoy usamos. Es un referente para la inclusión de mujeres en la informática.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+      <div class="ribbon">Pionera de la informática</div>
+    </header>
 
-  <footer>
-    <small></small>
-  </footer>
+    <main>
+      <article class="fade-in">
+        <section id="biografia">
+          <h2>Biografía</h2>
+          <p class="muted">Grace Hopper (1906–1992) fue una matemática y científica de la computación estadounidense. Se doctoró en matemáticas y enseñó en la Universidad de Yale antes de unirse a la Marina durante la Segunda Guerra Mundial. Trabajó en la computadora Mark I en Harvard y fue pionera en el desarrollo de compiladores, defendiendo la idea de que los lenguajes de programación podían ser más cercanos al inglés humano. Su trabajo influyó en la creación de COBOL.</p>
+        </section>
+
+        <section id="logros" style="margin-top:18px">
+          <h2>Principales logros</h2>
+          <div class="stats">
+            <div class="stat">
+              <small>Área</small>
+              <h4>Compiladores</h4>
+              <p class="muted">Traducción de código humano a código máquina.</p>
+            </div>
+            <div class="stat">
+              <small>Contribución</small>
+              <h4>COBOL</h4>
+              <p class="muted">Lenguaje para negocios y administración.</p>
+            </div>
+            <div class="stat">
+              <small>Legado</small>
+              <h4>Educación</h4>
+              <p class="muted">Formación y divulgación técnica.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="citacion" style="margin-top:18px">
+          <h2>Cita destacada</h2>
+          <p class="quote">"Si no sabes cómo funciona algo, no te imaginas que puede fallar."</p>
+        </section>
+
+        <section id="impacto" style="margin-top:18px">
+          <h2>Impacto y legado</h2>
+          <p class="muted">Grace Hopper transformó la programación, acercándola a usuarios que no eran especialistas en hardware. Su enfoque permitió la estandarización y expansión de la informática en la industria, la administración pública y la educación. A día de hoy, su legado sigue en universidades, premios y el nombre de navíos y edificios tecnológicos.</p>
+        </section>
+
+        <section id="extras" style="margin-top:18px">
+          <img src="https://www.muycomputerpro.com/wp-content/uploads/2014/01/cobol_host.jpg" alt="COBOL">
+          
+        </section>
+      </article>
+
+      <aside>
+        <div class="card fade-in">
+          <h3>Línea de tiempo</h3>
+          <ul class="timeline" id="timelineList">
+            <li><strong>1906</strong> — Nace en Nueva York.</li>
+            <li><strong>1934</strong> — Doctorado en Matemáticas (Yale).</li>
+            <li><strong>1943</strong> — Se une a la Marina de EE. UU.; trabaja en Mark I (Harvard).</li>
+            <li><strong>1952</strong> — Desarrolla uno de los primeros compiladores experimentales.</li>
+            <li><strong>1959</strong> — Participa en el desarrollo de COBOL.</li>
+            <li><strong>1966–1986</strong> — Continúa en roles consultivos y educativos; asciende a contraalmirante.</li>
+            <li><strong>1992</strong> — Fallece; su legado perdura.</li>
+          </ul>
+        </div>
+
+        <div class="card fade-in">
+          <h3>Datos rápidos</h3>
+          <p class="muted"><strong>Profesión:</strong> Matemática, Científica de la computación.</p>
+          <p class="muted"><strong>Títulos:</strong> Ph.D. en Matemáticas.</p>
+          <p class="muted"><strong>Conocida por:</strong> Compiladores, COBOL, influencia educativa.</p>
+        </div>
+
+        <div class="card fade-in">
+          <h3 id="recursos">Datos sobre COBOL</h3>
+          <p class="muted">COBOL es un lenguaje de programación de alto nivel para el procesamiento de datos comerciales, diseñado en 1959.</p>
+          <ul class="muted">
+            <li>Usa una sintaxis parecida al inglés, lo que lo hace más legible que otros lenguajes de su época.</li>
+            <li>Es un lenguaje imperativo, estructurado y orientado a datos.</li>
+            <li>Está diseñado para gestionar grandes volúmenes de datos, especialmente en bancos, seguros, y gobiernos.</li>
+            <li>https://www.ibm.com/mx-es/think/topics/cobol</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      
+    </footer>
+  </div>
+
+  
 </body>
 </html>
+
